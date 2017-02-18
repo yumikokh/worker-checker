@@ -59,6 +59,7 @@ $.ajax({
     gridW: 5,
     gridH: 8,
     gridSize: 32,
+    word: word,
   });
   officeWindows.draw();
   setInterval(() => {
