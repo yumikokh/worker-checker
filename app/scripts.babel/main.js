@@ -17,11 +17,6 @@ const $form = $("#word-form");
 const $iframe = $("#hidden-iframe");
 
 
-/*
-TODO: 出社時間の取得
-- segments[firstOfficeEnteringIndex].startTime;
-*/
-
 $.ajax({
   url: `${API_ROOT_URL}${PLACES}${today}`,
   type: "GET",
