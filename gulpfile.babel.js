@@ -4,6 +4,9 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import del from 'del';
 import runSequence from 'run-sequence';
 import {stream as wiredep} from 'wiredep';
+import source from "vinyl-source-stream";
+import browserify from "browserify";
+import babelify from "babelify";
 
 const $ = gulpLoadPlugins();
 
@@ -90,13 +93,17 @@ gulp.task('chromeManifest', () => {
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('babel', () => {
-  return gulp.src('app/scripts.babel/**/*.js')
-      .pipe($.babel({
-        presets: ['es2015']
-      }))
-      .pipe(gulp.dest('app/scripts'));
+["background", "chromereload", "popup"].forEach((name, i) => {
+  gulp.task(`babel:${name}`, () => {
+    return browserify(`app/scripts.babel/${name}.js`)
+        .transform(babelify)
+        .bundle()
+        .pipe(source(`${name}.js`))
+        .pipe(gulp.dest(`app/scripts`));
+  });
 });
+
+gulp.task('babel', ['babel:background', 'babel:chromereload', 'babel:popup']);
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
