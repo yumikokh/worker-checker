@@ -7,6 +7,7 @@ const API_ROOT_URL = "https://api.moves-app.com/api/1.1";
 const PLACES = "/user/places/daily/";
 const ACCESS_TOKEN = "3o1RGDb8xLkcE0sx7lp4r243daQQt8WbyxmU9yd3MIGoWCMsLWFMO_80RFIIlBXO";
 const today = formatYYYYMMDD(new Date());
+const time = formatHHMM(new Date());
 let activitiesData = {};
 let lastUpdate = '';
 const $update = $(".last-update");
@@ -14,7 +15,6 @@ const $place = $(".place");
 const $dotArea = $(".js-dot");
 const $form = $("#word-form");
 const $iframe = $("#hidden-iframe");
-let rect = calcDotArray("あ", 32);
 
 
 /*
@@ -40,8 +40,6 @@ $.ajax({
   $update.text(enterOfficeTime);
 });
 
-setRectAnimation();
-
 
 const sheetId = '1zp0po8_VMMVGGqmfA-p310lPfi6PtrDJllJCLWXblMk';
 const workSheetId = 'onxsx29';
@@ -53,6 +51,13 @@ $.ajax({
 }).done((res, status, jqXHR) => {
   if(!res.feed.entry) return;
   console.log(formatSheetData(res.feed.entry));
+  let word = _.filter(formatSheetData(res.feed.entry), (elm) => {
+    console.log(time, elm.time);
+    return time === elm.time;
+  });
+  word = word.length > 0 ? word[0].word : "ZAC";
+  const rect = calcDotArray(word, 32);
+  setRectAnimation(rect, 500);
 });
 
 $form.submit(() => {
@@ -70,6 +75,12 @@ function formatYYYYMMDD(date) {
   const month = `0${date.getMonth()+1}`.slice(-2);
   return year + month + day;
 }
+// date: Date型
+function formatHHMM(date) {
+  const hour = `0${date.getHours()}`.slice(-2);
+  const minutes = `0${date.getMinutes()}`.slice(-2);
+  return `${hour}:${minutes}`;
+}
 
 
 function getEnterOfficeTime(date) {
@@ -82,17 +93,17 @@ function getEnterOfficeTime(date) {
   return `${hour}:${min}:${sec}`;
 }
 
-function setRectAnimation() {
-  addRect();
+function setRectAnimation(rect, duration) {
+  addRect(rect);
 
   setInterval(() => {
     const firstRow = rect.shift();
     rect.push(firstRow);
-    addRect();
-  }, 500);
+    addRect(rect);
+  }, duration);
 }
 
-function addRect() {
+function addRect(rect) {
   $dotArea.text("");
   for(let i = 0, row = rect.length; i < row; i++) {
     for(let j = 0, col = rect[i].length; j < col; j++) {
