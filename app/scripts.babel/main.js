@@ -10,6 +10,8 @@ let lastUpdate = '';
 const $update = $(".last-update");
 const $place = $(".place");
 const $dotArea = $(".js-dot");
+let rect = calcDotArray("あ", 32);
+
 
 /*
 TODO: 出社時間の取得
@@ -35,6 +37,8 @@ $.ajax({
 });
 
 
+setRectAnimation();
+
 // date: Date型
 function formatYYYYMMDD(date) {
   const year = date.getFullYear();
@@ -54,9 +58,6 @@ function getEnterOfficeTime(date) {
   return `${hour}:${min}:${sec}`;
 }
 
-/*
-
-*/
 function calcDotArray(word, gridSize) {
   const dotArray = [];
   const canvas = document.createElement('canvas');
@@ -93,10 +94,22 @@ function calcDotArray(word, gridSize) {
   return dotArray;
 }
 
-const rect = calcDotArray("あ", 32);
-for(let i = 0, row = rect.length; i < row; i++) {
-  for(let j = 0, col = rect[i].length; j < col; j++) {
-    $dotArea.append(rect[i][j] ? "■": "□");
+function setRectAnimation() {
+  addRect();
+
+  setInterval(() => {
+    const firstRow = rect.shift();
+    rect.push(firstRow);
+    addRect();
+  }, 500);
+}
+
+function addRect() {
+  $dotArea.text("");
+  for(let i = 0, row = rect.length; i < row; i++) {
+    for(let j = 0, col = rect[i].length; j < col; j++) {
+      $dotArea.append(rect[i][j] ? "■": "□");
+    }
+    $dotArea.append("\n");
   }
-  $dotArea.append("\n");
 }
