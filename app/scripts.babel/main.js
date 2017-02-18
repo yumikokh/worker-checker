@@ -9,6 +9,7 @@ let activitiesData = {};
 let lastUpdate = '';
 const $update = $(".last-update");
 const $place = $(".place");
+const $dotArea = $(".js-dot");
 
 /*
 TODO: 出社時間の取得
@@ -33,6 +34,7 @@ $.ajax({
   $update.text(enterOfficeTime);
 });
 
+
 // date: Date型
 function formatYYYYMMDD(date) {
   const year = date.getFullYear();
@@ -40,6 +42,7 @@ function formatYYYYMMDD(date) {
   const month = `0${date.getMonth()+1}`.slice(-2);
   return year + month + day;
 }
+
 
 function getEnterOfficeTime(date) {
   const year = date.slice(0, 4);
@@ -49,4 +52,51 @@ function getEnterOfficeTime(date) {
   const min = date.slice(11, 13);
   const sec = date.slice(13, 15);
   return `${hour}:${min}:${sec}`;
+}
+
+/*
+
+*/
+function calcDotArray(word, gridSize) {
+  const dotArray = [];
+  const canvas = document.createElement('canvas');
+  canvas.width = gridSize;
+  canvas.height = gridSize;
+  const cw = canvas.width;
+  const ch = canvas.height;
+
+  const context = canvas.getContext('2d');
+  context.font = `${gridSize}px "Helvetica"`;
+  context.textBaseline = 'top';
+  context.textAlign = 'left';
+  context.fillStyle = 'rgb(0, 0, 0)';
+  context.clearRect(0, 0, cw, ch);
+  for(let i = 0; i < word.length; i++) {
+    context.clearRect(0, 0, cw, ch);
+    context.fillText(word[i], 0, 0);
+    const imgData = context.getImageData(0, 0, cw, ch);
+    const pixels = imgData.data;
+    document.body.appendChild(canvas);
+
+    for(let h = 0; h < ch; h++) {
+      const row = [];
+      for (let w = 0; w < cw; w++) {
+        const colorBasePos = (w + h * cw) * 4  +3;
+        const alpha = pixels[colorBasePos];
+        row.push(alpha > 127);
+      }
+      dotArray.push(row);
+    }
+
+  }
+  console.log(dotArray);
+  return dotArray;
+}
+
+const rect = calcDotArray("あ", 32);
+for(let i = 0, row = rect.length; i < row; i++) {
+  for(let j = 0, col = rect[i].length; j < col; j++) {
+    $dotArea.append(rect[i][j] ? "■": "□");
+  }
+  $dotArea.append("\n");
 }
