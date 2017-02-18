@@ -21,13 +21,8 @@
     "webRequest",
     "*://*.google.com/"
   ],
-  "page_action": {
-    "default_icon": {
-      "19": "images/icon-19.png",
-      "38": "images/icon-38.png"
-    },
-    "default_title": "workerchecker",
-    "default_popup": "popup.html"
+  "chrome_url_overrides" : {
+    "newtab": "newtab.html"
   },
   "web_accessible_resources": [
     "images/icon-48.png"
