@@ -2,31 +2,51 @@ import $ from "jquery";
 import _ from "lodash";
 
 const API_ROOT_URL = "https://api.moves-app.com/api/1.1";
-const ACTIVITY = "/user/activities/daily/";
-const ACCESS_TOKEN = "Jcd9PJT89wW2OqEq1BM93_Q1hJQ8II3ImQyD2muH2OPk9Uc_wTyVsWrWY6Cw1bj9";
+const PLACES = "/user/places/daily/";
+const ACCESS_TOKEN = "3o1RGDb8xLkcE0sx7lp4r243daQQt8WbyxmU9yd3MIGoWCMsLWFMO_80RFIIlBXO";
 const today = formatYYYYMMDD(new Date());
+let activitiesData = {};
+let lastUpdate = '';
+const $update = $(".last-update");
+const $place = $(".place");
 
 /*
 TODO: 出社時間の取得
 - segments[firstOfficeEnteringIndex].startTime;
 */
+
 $.ajax({
-  url: `${API_ROOT_URL}${ACTIVITY}${today}`,
+  url: `${API_ROOT_URL}${PLACES}${today}`,
   type: "GET",
   dataType: "json",
   data: {
     access_token: ACCESS_TOKEN,
   },
-}).done((res, textStatus, jqXHR) => {
-  console.log(res, textStatus, jqXHR);
+}).done((res, status, jqXHR) => {
+  lastUpdate = res[0].lastUpdate;
+  activitiesData = res[0].segments;
+  const placeName = /カヤック/g;
+  const placeData = _.filter(activitiesData, (elm) => {
+    return placeName.test(elm.place.name) && elm.startTime.slice(6, 8) === today.slice(-2);
+  });
+  const enterOfficeTime = placeData.length > 0 ? getEnterOfficeTime(placeData[0].startTime) : "出社してないよ！";
+  $update.text(enterOfficeTime);
 });
 
 // date: Date型
 function formatYYYYMMDD(date) {
-  if(!date.getYear) date = new Date(date);
   const year = date.getFullYear();
   const day = `0${date.getDate()}`.slice(-2);
   const month = `0${date.getMonth()+1}`.slice(-2);
   return year + month + day;
 }
 
+function getEnterOfficeTime(date) {
+  const year = date.slice(0, 4);
+  const month = date.slice(4, 6);
+  const day = date.slice(6, 8);
+  const hour = date.slice(9, 11);
+  const min = date.slice(11, 13);
+  const sec = date.slice(13, 15);
+  return `${hour}:${min}:${sec}`;
+}
