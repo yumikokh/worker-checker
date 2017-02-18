@@ -21,7 +21,7 @@
   "chrome_url_overrides" : {
     "newtab": "newtab.html"
   },
-  "options_page": "options.html",
+  "options_page": "option.html",
   "web_accessible_resources": [
     "images/icon-48.png"
   ],
