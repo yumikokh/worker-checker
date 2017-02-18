@@ -30,6 +30,6 @@ module.exports = (word, gridSize) => {
     }
 
   }
-  console.log(dotArray);
+
   return dotArray;
 }

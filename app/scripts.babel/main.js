@@ -2,6 +2,7 @@ import $ from "jquery";
 import _ from "lodash";
 import formatSheetData from "./lib/formatSheetData";
 import calcDotArray from "./lib/calcDotArray";
+import OfficeWindows from "./lib/OfficeWindows";
 
 const API_ROOT_URL = "https://api.moves-app.com/api/1.1";
 const PLACES = "/user/places/daily/";
@@ -51,8 +52,19 @@ $.ajax({
     return time === elm.time;
   });
   word = word.length > 0 ? word[0].word : "ZAC";
-  const rect = calcDotArray(word, 32);
-  setRectAnimation(rect, 500);
+  const officeWindows = new OfficeWindows({
+    canvas: document.getElementById("office-windows"),
+    width: 220,
+    height: 600,
+    gridW: 5,
+    gridH: 8,
+    gridSize: 32,
+  });
+  officeWindows.draw();
+  setInterval(() => {
+    officeWindows.update();
+    officeWindows.draw();
+  }, 200);
 });
 
 $form.submit(() => {
@@ -96,14 +108,4 @@ function setRectAnimation(rect, duration) {
     rect.push(firstRow);
     addRect(rect);
   }, duration);
-}
-
-function addRect(rect) {
-  $dotArea.text("");
-  for(let i = 0, row = rect.length; i < row; i++) {
-    for(let j = 0, col = rect[i].length; j < col; j++) {
-      $dotArea.append(rect[i][j] ? "■": "□");
-    }
-    $dotArea.append("\n");
-  }
 }
