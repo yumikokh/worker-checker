@@ -1,5 +1,6 @@
 import $ from "jquery";
 import _ from "lodash";
+import formatSheetData from "./lib/formatSheetData";
 
 const API_ROOT_URL = "https://api.moves-app.com/api/1.1";
 const PLACES = "/user/places/daily/";
@@ -10,6 +11,8 @@ let lastUpdate = '';
 const $update = $(".last-update");
 const $place = $(".place");
 const $dotArea = $(".js-dot");
+const $form = $("#word-form");
+const $iframe = $("#hidden-iframe");
 let rect = calcDotArray("あ", 32);
 
 
@@ -36,8 +39,28 @@ $.ajax({
   $update.text(enterOfficeTime);
 });
 
-
 setRectAnimation();
+
+
+const sheetId = '1zp0po8_VMMVGGqmfA-p310lPfi6PtrDJllJCLWXblMk';
+const workSheetId = 'onxsx29';
+const SHEET_URL = `https://spreadsheets.google.com/feeds/list/${sheetId}/${workSheetId}/public/basic?alt=json`;
+$.ajax({
+  url: SHEET_URL,
+  type: "GET",
+  dataType: "json",
+}).done((res, status, jqXHR) => {
+  if(!res.feed.entry) return;
+  console.log(formatSheetData(res.feed.entry));
+});
+
+$form.submit(() => {
+  console.log("送った");
+});
+$iframe.on("load", () => {
+  $("body").append("<p>送信しました。</p>");
+});
+
 
 // date: Date型
 function formatYYYYMMDD(date) {
