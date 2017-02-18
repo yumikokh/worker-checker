@@ -1,6 +1,6 @@
 # workerchecker
 
-> My sweet app
+Chrome extention to check how much you take time
 
 
 ## Dev
@@ -9,21 +9,24 @@
 $ npm install
 ```
 
-### Run
+### Watch
 
 ```
-$ npm start
+$ gulp install
 ```
 
 ### Build
 
 ```
-$ npm run build
+$ gulp build
 ```
 
-Builds the app for OS X, Linux, and Windows, using [electron-packager](https://github.com/maxogden/electron-packager).
+### Package
+
+```
+$ gulp package
+```
 
 
-## License
-
-MIT © [kokubu-yumiko](http://test)
+## Thanks
+[yeoman/generator\-chrome\-extension: Scaffold out a Chrome extension](https://github.com/yeoman/generator-chrome-extension#readme)
