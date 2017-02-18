@@ -15,16 +15,15 @@
     ]
   },
   "permissions": [
-    "notifications",
     "tabs",
-    "topSites",
-    "webRequest",
     "*://*.google.com/"
   ],
   "chrome_url_overrides" : {
     "newtab": "newtab.html"
   },
+  "options_page": "option.html",
   "web_accessible_resources": [
     "images/icon-48.png"
-  ]
+  ],
+  "homepage_url": "https://yumikokh.github.io/workercheker/"
 }
