@@ -1,6 +1,6 @@
 # workerchecker
 
-Chrome extention to check how much you take time
+Chrome extention to check how much you take time to work
 
 
 ## Dev
@@ -12,7 +12,7 @@ $ npm install
 ### Watch
 
 ```
-$ gulp install
+$ gulp watch
 ```
 
 ### Build
