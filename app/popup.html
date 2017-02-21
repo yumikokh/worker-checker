@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="styles/popup.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1 class="tips" title="HH:MMに指定した時間にWORDがビルの窓に流れます。">What's this?</h1>
+    <form id="word-form" action="https://docs.google.com/forms/d/1XAL65CbJjt2XF5MLfk5tXGrsy-zs9YdWs_aLteR6dtk/formResponse" method="POST" target="hidden_iframe">
+      <input type="text" name="entry.1840825696" id="time" placeholder="HH:MM" pattern="[0-9][0-9]:[0-9][0-9]" required>
+      <input type="text" name="entry.839745296" id="word" placeholder="WORD" required>
+      <input type="hidden" name="fvv" value="1">
+      <input type="hidden" name="draftResponse" value="[,,&quot;5743520450557421587&quot;]">
+      <input type="hidden" name="pageHistory" value="0">
+      <input type="hidden" name="fbzx" value="5743520450557421587">
+      <div class="setting">
+        <button type="submit">SET</button>
+        <a href="https://docs.google.com/spreadsheets/d/1zp0po8_VMMVGGqmfA-p310lPfi6PtrDJllJCLWXblMk/edit#gid=1447498427" target="_blank">シートURL</a>
+      </div>
+    </form>
+    <iframe src="" frameborder="0" name="hidden_iframe" id="hidden-iframe" style="display:none;"></iframe>
+    <script src="scripts/popup.js"></script>
+  </body>
+</html>

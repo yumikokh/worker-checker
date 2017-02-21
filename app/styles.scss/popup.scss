@@ -1,0 +1,83 @@
+$blue: #49f;
+$white: #f0f0f0;
+
+body {
+  width: 200px;
+  margin: 0;
+  padding: 20px;
+  font-feature-settings: "palt";
+  letter-spacing: .06em;
+}
+
+.tips {
+  font-size: 14px;
+}
+
+input[type="text"] {
+  appearance: none;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  display: block;
+  box-sizing: border-box;
+  padding: .5em 0 .2em;
+  font-size: 18px;
+  width: 200px;
+  background: rgba(0, 0, 0, 0);
+  border-bottom: 1px solid $blue;
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  &:placeholder,
+  &:-webkit-placeholder {
+    color: #666;
+  }
+
+}
+input[type="text"] + input[type="text"] {
+  margin-top: .5em;
+}
+
+
+
+button {
+  appearance: none;
+  outline: none;
+  box-shadow: none;
+  padding: .5em 1em;
+  border: none;
+  display: block;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0);
+  font-size: 15px;
+  color: $white;
+  background-color: $blue;
+  cursor: pointer;
+  &:hover {
+    background-color: lighten($blue, 5%);
+  }
+}
+
+.setting {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2em;
+  width: 100%;
+}
+
+a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  text-decoration: none;
+  color: $blue;
+  border: 1px solid $blue;
+  padding: .5em 1em;
+  width: 6em;
+  &:hover {
+    background-color: $blue;
+    color: $white;
+  }
+}

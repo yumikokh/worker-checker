@@ -68,13 +68,6 @@ $.ajax({
   }, 200);
 });
 
-$form.submit(() => {
-  console.log("送った");
-});
-$iframe.on("load", () => {
-  $("body").append("<p>送信しました。</p>");
-});
-
 
 // date: Date型
 function formatYYYYMMDD(date) {
