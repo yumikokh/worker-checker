@@ -93,7 +93,7 @@ gulp.task('chromeManifest', () => {
   .pipe(gulp.dest('dist'));
 });
 
-["background", "chromereload", "main", "popup"].forEach((name, i) => {
+["background", "chromereload", "main", "popup", "option"].forEach((name, i) => {
   gulp.task(`babel:${name}`, () => {
     return browserify(`app/scripts.babel/${name}.js`)
         .transform(babelify)
@@ -103,7 +103,7 @@ gulp.task('chromeManifest', () => {
   });
 });
 
-gulp.task('babel', ['babel:background', 'babel:chromereload', 'babel:popup']);
+gulp.task('babel', ['babel:background', 'babel:chromereload', 'babel:popup', 'babel:option']);
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
