@@ -103,7 +103,7 @@ gulp.task('chromeManifest', () => {
   });
 });
 
-gulp.task('babel', ['babel:background', 'babel:chromereload', 'babel:chromereload', 'babel:popup', 'babel:option']);
+gulp.task('babel', ['babel:background', 'babel:chromereload', 'babel:main', 'babel:popup', 'babel:option']);
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
