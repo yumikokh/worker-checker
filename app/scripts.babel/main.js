@@ -6,7 +6,7 @@ import OfficeWindows from "./lib/OfficeWindows";
 
 const API_ROOT_URL = "https://api.moves-app.com/api/1.1";
 const PLACES = "/user/places/daily/";
-const ACCESS_TOKEN = "3o1RGDb8xLkcE0sx7lp4r243daQQt8WbyxmU9yd3MIGoWCMsLWFMO_80RFIIlBXO";
+const ACCESS_TOKEN = localStorage["token"];
 const today = formatYYYYMMDD(new Date());
 const time = formatHHMM(new Date());
 let activitiesData = {};
@@ -34,6 +34,8 @@ $.ajax({
   });
   const enterOfficeTime = placeData.length > 0 ? getEnterOfficeTime(placeData[0].startTime) : "出社してないよ！";
   $update.text(enterOfficeTime);
+}).fail(res => {
+  if(res.responseText === "missing_access_token") console.error("ACCESS_TOKENをオプションから設定してください。");
 });
 
 
@@ -46,9 +48,7 @@ $.ajax({
   dataType: "json",
 }).done((res, status, jqXHR) => {
   if(!res.feed.entry) return;
-  console.log(formatSheetData(res.feed.entry));
   let word = _.filter(formatSheetData(res.feed.entry), (elm) => {
-    console.log(time, elm.time);
     return time === elm.time;
   });
   word = word.length > 0 ? word[0].word : "ZAC";
