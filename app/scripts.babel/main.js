@@ -57,7 +57,7 @@ $.ajax({
   const officeWindows = new OfficeWindows({
     canvas: document.getElementById("office-windows"),
     width: 290,
-    height: 568,
+    height: 565,
     gridW: 5,
     gridH: 8,
     gridSize: 32,
