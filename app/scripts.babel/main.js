@@ -3,6 +3,7 @@ import _ from "lodash";
 import formatSheetData from "./lib/formatSheetData";
 import calcDotArray from "./lib/calcDotArray";
 import OfficeWindows from "./lib/OfficeWindows";
+import updateWorkingTime from './view.js';
 
 require('./view.js');
 
@@ -13,11 +14,11 @@ const today = formatYYYYMMDD(new Date());
 const time = formatHHMM(new Date());
 let activitiesData = {};
 let lastUpdate = '';
-const $update = $(".last-update");
 const $place = $(".place");
 const $dotArea = $(".js-dot");
 const $form = $("#word-form");
 const $iframe = $("#hidden-iframe");
+let enterOfficeTime;
 
 
 $.ajax({
@@ -34,8 +35,8 @@ $.ajax({
   const placeData = _.filter(activitiesData, (elm) => {
     return placeName.test(elm.place.name) && elm.startTime.slice(6, 8) === today.slice(-2);
   });
-  const enterOfficeTime = placeData.length > 0 ? getEnterOfficeTime(placeData[0].startTime) : "出社してないよ！";
-  $update.text(enterOfficeTime);
+  enterOfficeTime = placeData.length > 0 ? getEnterOfficeTime(placeData[0].startTime) : "出社してないよ！";
+  updateWorkingTime(enterOfficeTime);
 }).fail(res => {
   if(res.responseText === "missing_access_token") console.error("ACCESS_TOKENをオプションから設定してください。");
 });

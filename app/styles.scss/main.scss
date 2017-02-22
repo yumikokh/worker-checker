@@ -113,11 +113,14 @@ p {
     top: 240px;
     left: 83px;
     font-size: 0.8em;
-    .last-update {
+    .time {
         margin: 0;
         font-size: 1.3em;
         margin-top: 3px;
         letter-spacing: 2px;
         font-weight: bold;
+    }
+    .last-update {
+        margin-bottom: 12px;
     }
 }
