@@ -86,7 +86,7 @@ function getEnterOfficeTime(date) {
   const year = date.slice(0, 4);
   const month = date.slice(4, 6);
   const day = date.slice(6, 8);
-  const hour = date.slice(9, 11);
+  const hour = date.slice(9, 11) - 0;
   const min = date.slice(11, 13);
   const sec = date.slice(13, 15);
   return `${hour}:${min}:${sec}`;

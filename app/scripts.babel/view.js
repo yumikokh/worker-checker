@@ -32,7 +32,7 @@ const getCurrentTime = () => {
     $currentTime.find('.year').text(date.getFullYear());
     $currentTime.find('.date').text(`${date.getMonth()+1}/${date.getDate()}`);
     $currentTime.find('.weekday').text(getWeekday());
-    $currentTime.find('.time').text(`${date.getHours()}:${date.getMinutes()}`);
+    $currentTime.find('.time').text(`${date.getHours()}:`+`0${date.getMinutes()}`.slice(-2));
 }
 getCurrentTime();
 setInterval(getCurrentTime, 60 * 1000);
