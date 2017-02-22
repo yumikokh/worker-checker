@@ -66,7 +66,7 @@ $.ajax({
   setInterval(() => {
     officeWindows.update();
     officeWindows.draw();
-  }, 160);
+  }, 190);
 });
 
 
