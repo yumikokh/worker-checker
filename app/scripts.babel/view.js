@@ -40,3 +40,10 @@ setInterval(getCurrentTime, 60 * 1000);
 const getWorkingTime = () => {
 
 }
+
+const blinkColon = setInterval(() => {
+  const $time = $currentTime.find('.time');
+  let text = $time.text();
+  text = (/:/.test(text)) ? text.replace(":", " ") : text.replace(" ", ":");
+  $time.text(text);
+}, 500);
