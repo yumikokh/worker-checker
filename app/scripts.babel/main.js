@@ -56,8 +56,8 @@ $.ajax({
   word = word.length > 0 ? word[0].word : "ZAC";
   const officeWindows = new OfficeWindows({
     canvas: document.getElementById("office-windows"),
-    width: 220,
-    height: 600,
+    width: 290,
+    height: 568,
     gridW: 5,
     gridH: 8,
     gridSize: 32,
