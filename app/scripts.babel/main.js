@@ -14,10 +14,6 @@ const time = formatHHMM(new Date());
 let activitiesData = {};
 let lastUpdate = '';
 const $update = $(".last-update");
-const $place = $(".place");
-const $dotArea = $(".js-dot");
-const $form = $("#word-form");
-const $iframe = $("#hidden-iframe");
 
 
 $.ajax({
