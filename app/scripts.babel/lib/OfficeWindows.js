@@ -1,5 +1,16 @@
 import calcDotsArray from "./calcDotArray";
-import isNight from "../view";
+// import isNight from "../view";
+// import { isNight } from './view.js';
+
+const date = new Date();
+const isNight = (() => {
+    if (date.getHours() >= 18) {
+        // return false; //debug
+        return true;
+    } else {
+        return false;
+    }
+})();
 
 export default class OfficeWindows {
     constructor(opts = {}) {
@@ -20,6 +31,7 @@ export default class OfficeWindows {
     init() {
         this.bgColor = isNight ? "#1a5369" : "#DCDEF7";
         this.txtColor = isNight ? "#FFEEA4" : "#FF2994";
+        console.log(isNight, this.bgColor, this.txtColor)
     }
     update() {
         const firstCol = this.dotsArray.shift();

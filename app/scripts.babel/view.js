@@ -8,21 +8,20 @@ const $workingTime = $('.working-time');
 
 const isNight = (() => {
     if (date.getHours() >= 18) {
+        // return false; //debug
         return true;
     } else {
-        // return false;
-        return true; //debug
+        return false;
     }
 })();
-module.exports = isNight;
 
 
 if (isNight) {
     $wrapper.addClass('night');
 } else {
-    $wrapper.addClass('night'); //debug
-    // $wrapper.addClass('morning');
+    $wrapper.addClass('morning');
 }
+
 const getWeekday = () => {
     const weekdayAry = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const weekday = date.getDay();
@@ -58,6 +57,7 @@ const updateWorkingTime = (enterOfficeTime) => {
     update();
     setInterval(update, 10 * 100);
 }
+
 module.exports = updateWorkingTime;
 
 const to2digit = (num) => {
@@ -92,7 +92,6 @@ const createStar = () => {
 const createShootingStar = () => {
     const pos = { x: getRandomNum(0, 70), y: getRandomNum(0, 50) };
     const degNum = Math.floor(getRandomNum(-20, 20));
-    console.log(degNum)
     const $shootingStarContainer = $('<div />').addClass('shootingStarContainer').css({
         transform: `rotateZ(${degNum}deg)`,
         right: `${pos.x}%`,
