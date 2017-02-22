@@ -4,6 +4,8 @@ import formatSheetData from "./lib/formatSheetData";
 import calcDotArray from "./lib/calcDotArray";
 import OfficeWindows from "./lib/OfficeWindows";
 
+require('./view.js');
+
 const API_ROOT_URL = "https://api.moves-app.com/api/1.1";
 const PLACES = "/user/places/daily/";
 const ACCESS_TOKEN = localStorage["token"];

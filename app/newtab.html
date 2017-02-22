@@ -1,15 +1,33 @@
 <!doctype html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <link href="styles/main.css" rel="stylesheet">
-  </head>
-  <body>
-    <h1>Worker Checker</h1>
-    <p class="last-update"></p>
-    <p class="place"></p>
-    <pre class="js-dot"></pre>
-    <canvas id="office-windows"></canvas>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="wave"></div>
+        <div class="moon"></div>
+        <div class="city"></div>
+        <div class="building">
+            <pre class="js-dot"></pre>
+            <canvas id="office-windows"></canvas>
+        </div>
+        <div class="current-time">
+            <p class="year">2017</p>
+            <p class="date">02/18</p>
+            <p class="weekday">Sat</p>
+            <p class="time">15:39</p>
+        </div>
+        <div class="working-time">
+            <p class="text">You're working for</p>
+            <p class="last-update"></p>
+            <p class="place"></p>
+        </div>
+    </div>
     <script src="scripts/main.js"></script>
-  </body>
+</body>
+
 </html>
