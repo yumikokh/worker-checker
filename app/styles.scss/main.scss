@@ -15,6 +15,7 @@ p {
     font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
     font-size: 24px;
     color: #fff;
+    overflow: hidden;
     &.night {
         background: linear-gradient(-120deg, #00152b 0%, #003c5d 47%, #6a8cc6 100%);
     }
@@ -33,6 +34,8 @@ p {
 }
 
 .building {
+    box-sizing: border-box;
+    padding: 10px;
     width: 360px;
     height: 600px;
     position: absolute;

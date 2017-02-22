@@ -17,8 +17,6 @@ module.exports = (word, gridSize) => {
     context.fillText(word[i], 0, 0);
     const imgData = context.getImageData(0, 0, cw, ch);
     const pixels = imgData.data;
-    // document.body.appendChild(canvas);
-
     for(let h = 0; h < ch; h++) {
       const row = [];
       for (let w = 0; w < cw; w++) {
