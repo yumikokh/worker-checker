@@ -91,18 +91,17 @@ const createStar = () => {
 
 const createShootingStar = () => {
     const pos = { x: getRandomNum(0, 70), y: getRandomNum(0, 50) };
-    const degNum = Math.floor(getRandomNum(0, 70));
+    const degNum = Math.floor(getRandomNum(-20, 20));
     console.log(degNum)
-    const $shootingStar = $('<div />').addClass('shootingStar').css({
+    const $shootingStarContainer = $('<div />').addClass('shootingStarContainer').css({
+        transform: `rotateZ(${degNum}deg)`,
         right: `${pos.x}%`,
         top: `${pos.y}%`,
-        transform: `rotateZ(${degNum}deg)`,
     });
-    $sky.append($shootingStar);
+    const $shootingStar = $('<div />').addClass('shootingStar');
+    $shootingStarContainer.append($shootingStar);
+    $sky.append($shootingStarContainer);
 
-    setTimeout(()=>{
-      $shootingStar.remove();
-    }, 1000);
 }
 
 if (isNight) {
