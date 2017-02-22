@@ -51,8 +51,6 @@ const updateWorkingTime = (enterOfficeTime) => {
         const minute = to2digit(Math.floor(passingsec % 3600 / 60 | 0));
         const second = to2digit(Math.floor(passingsec % 60));
 
-
-
         $workingTime.find('.count').text(`${hour}:${minute}:${second}`);
 
         // console.log(`${hour}:${minute}:${second}`)
@@ -79,17 +77,35 @@ const getRandomNum = (min, max) => {
 }
 
 const createStar = () => {
-    if (isNight) {
-        let i = 0;
-        while (i < 40) {
-            const pos = { x: getRandomNum(0, 100), y: getRandomNum(0, 100) };
-            const $star = $('<div />').addClass('star').css({
-                left: `${pos.x}%`,
-                top: `${pos.y}%`
-            });
-            $sky.append($star);
-            i++;
-        }
+    let i = 0;
+    while (i < 40) {
+        const pos = { x: getRandomNum(0, 100), y: getRandomNum(0, 100) };
+        const $star = $('<div />').addClass('star').css({
+            left: `${pos.x}%`,
+            top: `${pos.y}%`
+        });
+        $sky.append($star);
+        i++;
     }
 }
-createStar();
+
+const createShootingStar = () => {
+    const pos = { x: getRandomNum(0, 70), y: getRandomNum(0, 50) };
+    const degNum = Math.floor(getRandomNum(0, 70));
+    console.log(degNum)
+    const $shootingStar = $('<div />').addClass('shootingStar').css({
+        right: `${pos.x}%`,
+        top: `${pos.y}%`,
+        transform: `rotateZ(${degNum}deg)`,
+    });
+    $sky.append($shootingStar);
+
+    setTimeout(()=>{
+      $shootingStar.remove();
+    }, 1000);
+}
+
+if (isNight) {
+    createStar();
+    setInterval(createShootingStar, 1200);
+}

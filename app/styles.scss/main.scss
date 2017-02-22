@@ -96,6 +96,30 @@ p {
         border-radius: $size;
         background: #fff;
     }
+    .shootingStar {
+        position: absolute;
+        width: 260px;
+        height: 26px;
+        opacity: 0;
+        animation: 1.4s shootingStar;
+        @include bg-img("shooting_star.png");
+    }
+}
+
+@keyframes shootingStar {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0);
+    }
+    40% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-500px, 10px);
+    }
 }
 
 .current-time {
