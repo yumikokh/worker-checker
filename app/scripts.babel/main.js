@@ -52,7 +52,7 @@ $.ajax({
   let word = _.filter(formatSheetData(res.feed.entry), (elm) => {
     return time === elm.time;
   });
-  word = word.length > 0 ? word[0].word : "ZAC";
+  word = word.length > 0 ? word[0].word : "つくっていいとも";
   const officeWindows = new OfficeWindows({
     canvas: document.getElementById("office-windows"),
     width: 290,
