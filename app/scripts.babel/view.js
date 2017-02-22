@@ -2,6 +2,7 @@ import $ from "jquery";
 
 const date = new Date();
 const $wrapper = $('.wrapper');
+const $sky = $('.sky');
 const $currentTime = $('.current-time');
 const $workingTime = $('.working-time');
 
@@ -32,7 +33,7 @@ const getCurrentTime = () => {
     $currentTime.find('.year').text(date.getFullYear());
     $currentTime.find('.date').text(`${date.getMonth()+1}/${date.getDate()}`);
     $currentTime.find('.weekday').text(getWeekday());
-    $currentTime.find('.time').text(`${date.getHours()}:`+`0${date.getMinutes()}`.slice(-2));
+    $currentTime.find('.time').text(`${date.getHours()}:` + `0${date.getMinutes()}`.slice(-2));
 }
 getCurrentTime();
 setInterval(getCurrentTime, 20 * 1000);
@@ -54,7 +55,7 @@ const updateWorkingTime = (enterOfficeTime) => {
 
         $workingTime.find('.count').text(`${hour}:${minute}:${second}`);
 
-        console.log(`${hour}:${minute}:${second}`)
+        // console.log(`${hour}:${minute}:${second}`)
     }
     update();
     setInterval(update, 10 * 100);
@@ -66,8 +67,29 @@ const to2digit = (num) => {
 }
 
 const blinkColon = setInterval(() => {
-  const $time = $currentTime.find('.time');
-  let text = $time.text();
-  text = (/:/.test(text)) ? text.replace(":", " ") : text.replace(" ", ":");
-  $time.text(text);
+    const $time = $currentTime.find('.time');
+    let text = $time.text();
+    text = (/:/.test(text)) ? text.replace(":", " ") : text.replace(" ", ":");
+    $time.text(text);
 }, 500);
+
+
+const getRandomNum = (min, max) => {
+    return Math.random() * (max - min) + min;
+}
+
+const createStar = () => {
+    if (isNight) {
+        let i = 0;
+        while (i < 40) {
+            const pos = { x: getRandomNum(0, 100), y: getRandomNum(0, 100) };
+            const $star = $('<div />').addClass('star').css({
+                left: `${pos.x}%`,
+                top: `${pos.y}%`
+            });
+            $sky.append($star);
+            i++;
+        }
+    }
+}
+createStar();
