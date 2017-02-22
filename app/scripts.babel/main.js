@@ -18,8 +18,6 @@ const $place = $(".place");
 const $dotArea = $(".js-dot");
 const $form = $("#word-form");
 const $iframe = $("#hidden-iframe");
-let enterOfficeTime;
-
 
 $.ajax({
   url: `${API_ROOT_URL}${PLACES}${today}`,
@@ -35,7 +33,7 @@ $.ajax({
   const placeData = _.filter(activitiesData, (elm) => {
     return placeName.test(elm.place.name) && elm.startTime.slice(6, 8) === today.slice(-2);
   });
-  enterOfficeTime = placeData.length > 0 ? getEnterOfficeTime(placeData[0].startTime) : "出社してないよ！";
+  const enterOfficeTime = placeData.length > 0 ? getEnterOfficeTime(placeData[0].startTime) : "出社してないよ！";
   updateWorkingTime(enterOfficeTime);
 }).fail(res => {
   if(res.responseText === "missing_access_token") console.error("ACCESS_TOKENをオプションから設定してください。");
@@ -91,7 +89,7 @@ function getEnterOfficeTime(date) {
   const year = date.slice(0, 4);
   const month = date.slice(4, 6);
   const day = date.slice(6, 8);
-  const hour = date.slice(9, 11);
+  const hour = date.slice(9, 11) - 0;
   const min = date.slice(11, 13);
   const sec = date.slice(13, 15);
   return `${hour}:${min}:${sec}`;
